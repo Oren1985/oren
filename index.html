@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אתר הנצחה וזיכרון - עמוס זצ"ל</title>
+    <style>
+        /* עיצוב כללי באווירת תורה וקודש */
+        :root {
+            --primary-color: #1a2e40; /* כחול כהה מלכותי */
+            --accent-color: #c5a059;  /* זהב עתיק */
+            --bg-color: #fcf9f2;      /* גוון קלף בהיר */
+            --text-color: #2b2b2b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            font-size: 19px; /* פונט מוגדל לקריאה נוחה */
+        }
+
+        /* תפריט ניווט רספונסיבי - מוצמד לפינה הימנית */
+        header {
+            background-color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start; /* מיישר את כל האלמנטים להתחלה (ימין באזורי RTL) */
+            align-items: center;
+            padding: 15px 30px; 
+            position: relative;
+            gap: 35px; /* מרווח קבוע בין הלוגו לקישורי התפריט */
+        }
+
+        .logo {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 24px;
+            white-space: nowrap;
+        }
+
+        /* תפריט קישורים במחשב - מיושר לימין */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* כפתור המבורגר למובייל - מופיע בצד ימין */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1005; /* מוודא שהכפתור תמיד מעל הכל וניתן ללחיצה */
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background-color: #ffffff;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* הירו סקשן בגודל מוגדר 900x200 */
+        .hero-container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .hero {
+            width: 900px;
+            height: 200px;
+            background: linear-gradient(rgba(26, 46, 64, 0.85), rgba(26, 46, 64, 0.85)), url('1.png') center/cover no-repeat;
+            border: 2px solid var(--accent-color);
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .hero h1 {
+            color: var(--accent-color);
+            font-size: 32px;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 20px;
+            font-style: italic;
+        }
+
+        /* סקשנים כלליים */
+        section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            position: relative;
+            font-size: 28px;
+        }
+
+        .section-title::after {
+            content: '♦';
+            display: block;
+            color: var(--accent-color);
+            font-size: 18px;
+            margin-top: 5px;
+        }
+
+        /* עמוד הדלקת נרות אינטראקטיבי */
+        .candles-section {
+            background: #ffffff;
+            border: 1px solid #e0d6be;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .candle-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+            min-height: 180px;
+        }
+
+        .candle-box {
+            background: #fffdf7;
+            border: 1px solid var(--accent-color);
+            padding: 20px;
+            border-radius: 6px;
+            width: 180px;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+
+        .candle-graphic {
+            width: 24px;
+            height: 50px;
+            background: #e5c158;
+            border-radius: 4px;
+            position: relative;
+            margin: 15px 0 10px 0;
+        }
+
+        .flame {
+            width: 14px;
+            height: 22px;
+            background: orange;
+            background: radial-gradient(orange, red);
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -19px;
+            left: 5px;
+            animation: flicker 0.6s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-2deg); opacity: 0.9; }
+            100% { transform: scale(1.1) rotate(2deg); opacity: 1; }
+        }
+
+        .candle-name {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 5px;
+            color: var(--primary-color);
+            word-break: break-word;
+            text-align: center;
+        }
+
+        .candle-words {
+            font-size: 14px;
+            color: #555555;
+            margin-top: 4px;
+            font-style: italic;
+            word-break: break-word;
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        .candles-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .input-field {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        textarea.input-field {
+            resize: none;
+            height: 80px;
+        }
+
+        .light-btn {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            border: none;
+            padding: 12px 35px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        .light-btn:hover {
+            background-color: #b08d4b;
+        }
+
+        /* מערכת סיפורים ברצף עם תמונה מימין בגודל 600x600 */
+        .story-display {
+            background: #ffffff;
+            border: 1px solid #e0d6be;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .story-card {
+            display: flex;
+            align-items: stretch;
+        }
+
+        .story-image-wrapper {
+            width: 600px;
+            height: 600px;
+            flex-shrink: 0;
+            background-color: #f0f0f0;
+        }
+
+        .story-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .banner img {
+            width: 90%;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .banner {
+            padding: 4px;
+            text-align: center;
+        }
+
+        .story-content {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .story-title {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+        }
+
+        .story-text {
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+
+        .story-nav-btns {
+            display: flex;
+            gap: 15px;
+        }
+
+        .story-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .story-btn:hover {
+            background-color: #244059;
+        }
+
+        /* גלריית תמונות */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .gallery-item {
+            background: white;
+            border: 1px solid #e0d6be;
+            padding: 10px;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .gallery-item.hidden {
+            display: none;
+        }
+
+        .load-more-container {
+            text-align: center;
+        }
+
+        /* פוטר */
+        footer {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-align: center;
+            padding: 25px;
+            border-top: 3px solid var(--accent-color);
+            margin-top: 60px;
+            font-size: 16px;
+        }
+
+        footer p {
+            margin-bottom: 5px;
+        }
+
+        .blessing {
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        /* מדיה קווריז ומובייל רספונסיבי */
+        @media (max-width: 940px) {
+            .hero-container {
+                padding: 10px;
+            }
+            .hero {
+                width: 100%;
+                height: auto;
+                padding: 40px 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                justify-content: flex-start; /* כולם צמודים לימין גם במובייל */
+                gap: 15px;
+                padding: 15px 20px;
+            }
+
+            .menu-toggle {
+                display: flex; 
+                order: 1; /* המבורגר ראשון מימין */
+            }
+
+            .logo {
+                order: 2; /* הלוגו שני מימין */
+            }
+
+            /* תפריט המבורגר נפתח מלמעלה בצורה תקינה */
+            .nav-links {
+                display: none; /* ברירת מחדל מוסתר */
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                background-color: var(--primary-color);
+                padding: 20px;
+                gap: 15px;
+                border-top: 1px solid var(--accent-color);
+                box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+                z-index: 999;
+            }
+
+            /* שימוש ב-Style ישיר או קלאס ייעודי לפתיחה */
+            .nav-links.open {
+                display: flex !important;
+            }
+
+            .story-card {
+                flex-direction: column;
+            }
+
+            .story-image-wrapper {
+                width: 100%;
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <img src="../rabi amos website/banner.jpg">
+    </div>
+    
+    <header>
+        <nav>
+            <div class="menu-toggle" onclick="toggleMenu(event)">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="logo">רבי עמוס ז"ל</div>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero" onclick="closeMenu()">ראשי</a></li>
+                <li><a href="#candles" onclick="closeMenu()">הדלקת נר</a></li>
+                <li><a href="#stories" onclick="closeMenu()">סיפורים על הרב</a></li>
+                <li><a href="#gallery" onclick="closeMenu()">גלריה</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero-container" id="hero">
+        <div class="hero">
+            <h1>גדול הדור מנתניה</h1>
+            <p>אתר הנצחה וזיכרון לפועלו ומורשתו של עמוס זצ"ל, שנרצח על קדושת השם בישיבתו</p>
+        </div>
+    </div>
+
+    <section id="candles">
+        <h2 class="section-title">הדלקת נר נשמה לעילוי נשמתו</h2>
+        <div class="candles-section">
+            <p style="margin-bottom: 20px;">הצטרפו להמוני בית ישראל והדליקו נר וירטואלי לעילוי נשמתו הטהורה של הצדיק.</p>
+            
+            <div class="candle-container" id="candlesGrid">
+                <div class="candle-box">
+                    <div class="candle-graphic"><div class="flame"></div></div>
+                    <div class="candle-name">משפחת כהן</div>
+                    <div class="candle-words">לעילוי נשמת הצדיק שתגן עלינו</div>
+                </div>
+                <div class="candle-box">
+                    <div class="candle-graphic"><div class="flame"></div></div>
+                    <div class="candle-name">ישראל ישראלי</div>
+                    <div class="candle-words">תנצנ"ה</div>
+                </div>
+            </div>
+
+            <div class="candles-action">
+                <input type="text" id="visitorName" class="input-field" placeholder="הקלידו את שמכם או שם המשפחה">
+                <textarea id="visitorWords" class="input-field" placeholder="כתבו מילות ברכה, הקדשה או תפילה (אופציונלי)"></textarea>
+                <button class="light-btn" onclick="lightCandle()">הדלק נר נשמה</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="stories">
+        <h2 class="section-title">סיפורים וזכרונות של רבי עמוס</h2>
+        <div class="story-display">
+            <div class="story-card">
+                <div class="story-image-wrapper">
+                    <img id="storyImg" src="2.webp" alt="עמוס באנר זצ'ל">
+                </div>
+                <div class="story-content">
+                    <h3 class="story-title" id="storyTitle">סיפור ראשון: דרכו בקודש ותחילת המסע</h3>
+                    <p class="story-text" id="storyText">עמוס  זצ'ל היה ידוע בצדקותו העצומה בעיר נתניה, באהבת התורה הבלתי מתפשרת ובמאור הפנים שבו קיבל כל אדם שהגיע לפתחו לקבלת עצה וברכה.</p>
+                    <div class="story-nav-btns">
+                        <button class="story-btn" onclick="prevStory()">הקודם</button>
+                        <button class="story-btn" onclick="nextStory()">הסיפור הבא</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2 class="section-title">תמונות של הצדיק</h2>
+        <div class="gallery-grid" id="galleryGrid">
+            <div class="gallery-item">
+                <img src="1.png" alt="תמונת צדיק 1">
+            </div>
+            <div class="gallery-item">
+                <img src="2.webp" alt="תמונת צדיק 2">
+            </div>
+            <div class="gallery-item">
+                <img src="3.jpg" alt="תמונת צדיק 3">
+            </div>
+            <div class="gallery-item hidden">
+                <img src="1.png" alt="תמונת צדיק 4">
+            </div>
+            <div class="gallery-item hidden">
+                <img src="2.webp" alt="תמונת צדיק 5">
+            </div>
+            <div class="gallery-item hidden">
+                <img src="3.jpg" alt="תמונת צדיק 6">
+            </div>
+        </div>
+        <div class="load-more-container">
+            <button class="light-btn" id="loadMoreBtn" style="width: auto;" onclick="loadMorePhotos()">טען עוד תמונות</button>
+        </div>
+    </section>
+
+<section  style="text-align: center;">
+
+<h3>אימייל לשליחת סיפורים על הרב</h3> 
+
+<p class="email" style="font-weight: bold; color: red;">
+story@gmail.com
+
+</p>
+</section>
+
+
+    <footer>
+        <p>זכותו של הצדיק עמוס זצ"ל תגן עלינו ועל כל בית ישראל אמן.</p>
+        <p class="blessing">נרך כבה על עירנו העצובה</p>
+        <p style="font-size: 13px; margin-top: 15px; opacity: 0.7;">© האתר נבנה על ידי אורן אליאס ©</p>
+    </footer>
+
+    <script>
+        // ניהול פתיחה וסגירה בטוחה של תפריט ההמבורגר במובייל
+        function toggleMenu(event) {
+            event.stopPropagation();
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('open');
+        }
+        
+        function closeMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.remove('open');
+        }
+
+        // סגירת התפריט בלחיצה בכל מקום אחר במסך
+        document.addEventListener('click', function() {
+            closeMenu();
+        });
+
+        // נתונים למערכת הסיפורים ברצף
+        const storiesData = [
+            {
+                title: 'סיפור ראשון: דרכו בקודש ותחילת המסע',
+                text: 'עמוס באנר זצ\'ל היה ידוע בצדקותו העצומה בעיר נתניה, באהבת התורה הבלתי מתפשרת ובמאור הפנים שבו קיבל כל אדם שהגיע לפתחו לקבלת עצה וברכה.',
+                img: '2.webp'
+            },
+            {
+                title: 'סיפור שני: ההתמדה בלימוד ועבודת השם בישיבה',
+                text: 'עדי ראייה מספרים כי הוא לא היה מפסיק ממשנתו יומם וליל בישיבתו אשר בנתניה. ספר התורה היה מונח לפניו תדיר, ותפילותיו הזכות בקעו שערי שמיים והביאו ישועות רבות.',
+                img: '3.jpg'
+            },
+            {
+                title: 'סיפור שלישי: מידת החסד והעזרה לקהילה',
+                text: 'מעשי החסד שלו בקרב הקהילה בנתניה נעשו כולם בצנעה מוחלטת ובסתר. משפחות נזקקות רבות נהנו מתמיכתו הקבועה מבלי שידעו כלל מי עומד מאחורי הסיוע.',
+                img: '1.png'
+            }
+        ];
+
+        let currentStoryIndex = 0;
+
+        function updateStory() {
+            const story = storiesData[currentStoryIndex];
+            document.getElementById('storyTitle').innerText = story.title;
+            document.getElementById('storyText').innerText = story.text;
+            document.getElementById('storyImg').src = story.img;
+        }
+
+        function nextStory() {
+            currentStoryIndex = (currentStoryIndex + 1) % storiesData.length;
+            updateStory();
+        }
+
+        function prevStory() {
+            currentStoryIndex = (currentStoryIndex - 1 + storiesData.length) % storiesData.length;
+            updateStory();
+        }
+
+        // מערכת להדלקת נרות עם הקדשה
+        function lightCandle() {
+            const nameInput = document.getElementById('visitorName');
+            const wordsInput = document.getElementById('visitorWords');
+            
+            const name = nameInput.value.trim();
+            const words = wordsInput.value.trim();
+            
+            if (name === "") {
+                alert("אנא הזינו שם כדי להדליק נר נשמה");
+                return;
+            }
+
+            const grid = document.getElementById('candlesGrid');
+            const candleBox = document.createElement('div');
+            candleBox.className = 'candle-box';
+            
+            candleBox.innerHTML = `
+                <div class="candle-graphic"><div class="flame"></div></div>
+                <div class="candle-name">${name}</div>
+                <div class="candle-words">${words !== "" ? words : 'תנצנ"ה'}</div>
+            `;
+            
+            grid.appendChild(candleBox);
+            
+            // איפוס שדות
+            nameInput.value = ""; 
+            wordsInput.value = ""; 
+        }
+
+        // מנגנון טעינה אינסופי של תמונות נוספות
+        // רשימת קבצי התמונות הזמינות באתר לצורך שכפול וטעינה מתמשכת
+        const photoSources = ['1.png', '2.webp', '3.jpg'];
+        let dynamicPhotoCounter = 4; // מונה התחלתי עבור ה-Alt של התמונות החדשות
+
+        function loadMorePhotos() {
+            const grid = document.getElementById('galleryGrid');
+            const hiddenItems = document.querySelectorAll('.gallery-grid .gallery-item.hidden');
+            const itemsToLoad = 3;
+            
+            // 1. אם קיימים עדיין אלמנטים מוסתרים ב-HTML, נחשוף אותם קודם כל
+            if (hiddenItems.length > 0) {
+                for (let i = 0; i < itemsToLoad && i < hiddenItems.length; i++) {
+                    hiddenItems[i].classList.remove('hidden');
+                }
+            } else {
+                // 2. אם כל התמונות המקוריות כבר גלויות, נייצר תמונות חדשות באופן דינמי כדי שהכפתור תמיד יטען עוד
+                for (let i = 0; i < itemsToLoad; i++) {
+                    // בחירת קובץ תמונה מתוך המערך לפי סדר מחזורי
+                    const randomSrc = photoSources[(dynamicPhotoCounter - 1) % photoSources.length];
+                    
+                    const newItem = document.createElement('div');
+                    newItem.className = 'gallery-item';
+                    newItem.innerHTML = `<img src="${randomSrc}" alt="תמונת צדיק ${dynamicPhotoCounter}">`;
+                    
+                    grid.appendChild(newItem);
+                    dynamicPhotoCounter++;
+                }
+            }
+        }
+    </script>
+
+<script>
+function lightCandle() {
+    const nameInput = document.getElementById('visitorName');
+    const wordsInput = document.getElementById('visitorWords');
+    
+    const name = nameInput.value.trim();
+    const words = wordsInput.value.trim();
+    
+    if (name === "") {
+        alert("אנא הזינו שם כדי להדליק נר נשמה");
+        return;
+    }
+
+    // הוספה לתצוגה
+    addCandleToGrid(name, words);
+    
+    // שמירה בזיכרון המקומי
+    let candles = JSON.parse(localStorage.getItem('candles')) || [];
+    candles.push({ name, words });
+    localStorage.setItem('candles', JSON.stringify(candles));
+    
+    nameInput.value = ""; 
+    wordsInput.value = ""; 
+}
+
+// פונקציית עזר להוספת נר ל-HTML
+function addCandleToGrid(name, words) {
+    const grid = document.getElementById('candlesGrid');
+    const candleBox = document.createElement('div');
+    candleBox.className = 'candle-box';
+    candleBox.innerHTML = `
+        <div class="candle-graphic"><div class="flame"></div></div>
+        <div class="candle-name">${name}</div>
+        <div class="candle-words">${words !== "" ? words : 'תנצנ"ה'}</div>
+    `;
+    grid.appendChild(candleBox);
+}
+
+</script>
+
+
+</body>
+</html>
